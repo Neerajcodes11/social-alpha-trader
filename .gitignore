@@ -8,3 +8,4 @@ dist/
 backend/data/
 backend/dist/
 frontend/.next/
+docs/
