@@ -1,18 +1,20 @@
-import { fetchAllSentiment } from "@/lib/api";
-import { SentimentData, DashboardData } from "@/types";
+import { getDashboardData } from "@/lib/services";
+import { DashboardData } from "@/types";
 import Navbar from "@/components/Navbar";
 import TickerBar from "@/components/TickerBar";
 import SentimentCard, { SentimentCardSkeleton } from "@/components/SentimentCard";
 import { Suspense } from "react";
 
+// ── No Internal Fetches (SSR) ──
 async function SentimentGrid() {
   let dashboard: DashboardData | null = null;
   let error = "";
 
   try {
-    dashboard = await fetchAllSentiment();
+    // Calling the service logic directly (Bypasses network, works 100% on Vercel)
+    dashboard = await getDashboardData();
   } catch (e: any) {
-    error = e.message ?? "Failed to load sentiment data";
+    error = e.message ?? "Direct logic failed";
   }
 
   if (error || !dashboard) {
@@ -20,11 +22,8 @@ async function SentimentGrid() {
       <div className="col-span-full text-center py-24">
         <div className="inline-flex flex-col items-center glass-card border border-border rounded-2xl px-12 py-10">
           <div className="text-4xl mb-4 opacity-60">⚠️</div>
-          <p className="text-lg font-medium mb-2 text-white/60">Backend unavailable</p>
+          <p className="text-lg font-medium mb-2 text-white/60">Data connection failure</p>
           <p className="text-sm text-white/30 max-w-sm">{error}</p>
-          <code className="mt-4 text-xs font-mono bg-bg-3 px-3 py-1.5 rounded-lg text-accent-2 border border-border">
-            npm run dev
-          </code>
         </div>
       </div>
     );
@@ -73,7 +72,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Ticker */}
+        {/* Ticker & Grid are within SentimentGrid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Suspense fallback={<SkeletonGrid />}>
             <SentimentGrid />
