@@ -2,9 +2,16 @@ import { SentimentData, TradeResult, ApiResponse, DashboardData } from "@/types"
 
 // For internal Next.js API routes, we need absolute URLs on the server.
 function getBaseUrl() {
-  if (typeof window !== "undefined") return ""; // browser can use relative path
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
+  // 1. If we're in the browser, always use a relative path
+  if (typeof window !== "undefined") return ""; 
+  
+  // 2. If we're on Vercel's server, we need the full absolute URL
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  
+  // 3. Fallback for Local Dev
+  return "http://localhost:3000";
 }
 
 const API_URL = getBaseUrl();
