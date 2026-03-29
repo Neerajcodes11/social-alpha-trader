@@ -1,0 +1,23 @@
+{
+  "log": [
+    "Starting smoke test for test_177efb98@example.com",
+    "--- Registering User ---",
+    "Register response: 201 {\"message\":\"Registration successful. Please check your email for verification.\",\"user\":{\"id\":\"de6b4208-07d8-4022-84de-5bed92f33167\",\"email\":\"test_177efb98@example.com\"}}",
+    "--- Verifying Email ---",
+    "Verify response: 200 {\"message\":\"Email verified successfully. You can now log in.\"}",
+    "--- Testing Brute Force Protection (5 fails) ---",
+    "Failed login attempt 1: 401 {\"error\":\"Invalid credentials\"}",
+    "Failed login attempt 2: 401 {\"error\":\"Invalid credentials\"}",
+    "Failed login attempt 3: 401 {\"error\":\"Invalid credentials\"}",
+    "Failed login attempt 4: 401 {\"error\":\"Invalid credentials\"}",
+    "Failed login attempt 5: 401 {\"error\":\"Invalid credentials\"}",
+    "--- Testing Locked Account ---",
+    "Locked login response: 401 {\"error\":\"Account locked due to multiple failed attempts. Please try again in 15 minutes.\"}",
+    "--- Testing Successful Login ---",
+    "Login response: 401 {\"error\":\"Account locked due to multiple failed attempts. Please try again in 15 minutes.\"}",
+    "--- Testing Protected Route (Trade) without Token ---",
+    "Trade without token: 401 \"{\\\"error\\\":\\\"Access denied. No token provided.\\\"}\"",
+    "--- Testing Protected Route (Trade) with Token ---",
+    "Trade with token: 403 \"{\\\"error\\\":\\\"Invalid token.\\\"}\""
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "log": [
+    "Login response: 200 {\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmZmYzFkLTY2Y2MtNDRhZC04MDJmLTRmMGZlYjIwNzU0OCIsImVtYWlsIjoidGVzdF9zdWNjZXNzXzUzMGU5N2E4QGV4YW1wbGUuY29tIiwiaWF0IjoxNzc0NjI1NDA4LCJleHAiOjE3NzQ3MTE4MDh9.MuFo1IO2WsoMcGlTHrOUiVpiPATRQhaBxmFdXa7DViU\",\"user\":{\"id\":\"8dfffc1d-66cc-44ad-802f-4f0feb207548\",\"email\":\"test_success_530e97a8@example.com\"}}",
+    "Trade with legitimate token: 400 \"{\\\"success\\\":false,\\\"error\\\":\\\"Missing required fields: symbol, amountUsd, tradeType\\\"}\""
+  ]
+}
